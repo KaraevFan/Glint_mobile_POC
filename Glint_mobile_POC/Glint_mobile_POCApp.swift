@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct Glint_mobile_POCApp: App {
+
+    init() {
+        ModelLoaderUtil.verifyModels()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
