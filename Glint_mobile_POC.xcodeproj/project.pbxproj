@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		B73B27922DC49B57007FDF9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B73B277C2DC49B57007FDF9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B73B27832DC49B57007FDF9A;
+			remoteInfo = Glint_mobile_POC;
+		};
+		B73B279C2DC49B57007FDF9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B73B277C2DC49B57007FDF9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B73B27832DC49B57007FDF9A;
+			remoteInfo = Glint_mobile_POC;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B73B27842DC49B57007FDF9A /* Glint_mobile_POC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glint_mobile_POC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73B27912DC49B57007FDF9A /* Glint_mobile_POCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Glint_mobile_POCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73B279B2DC49B57007FDF9A /* Glint_mobile_POCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Glint_mobile_POCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B73B27862DC49B57007FDF9A /* Glint_mobile_POC */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Glint_mobile_POC;
+			sourceTree = "<group>";
+		};
+		B73B27942DC49B57007FDF9A /* Glint_mobile_POCTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Glint_mobile_POCTests;
+			sourceTree = "<group>";
+		};
+		B73B279E2DC49B57007FDF9A /* Glint_mobile_POCUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Glint_mobile_POCUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B73B27812DC49B57007FDF9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73B278E2DC49B57007FDF9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73B27982DC49B57007FDF9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B73B277B2DC49B57007FDF9A = {
+			isa = PBXGroup;
+			children = (
+				B73B27862DC49B57007FDF9A /* Glint_mobile_POC */,
+				B73B27942DC49B57007FDF9A /* Glint_mobile_POCTests */,
+				B73B279E2DC49B57007FDF9A /* Glint_mobile_POCUITests */,
+				B73B27852DC49B57007FDF9A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B73B27852DC49B57007FDF9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B73B27842DC49B57007FDF9A /* Glint_mobile_POC.app */,
+				B73B27912DC49B57007FDF9A /* Glint_mobile_POCTests.xctest */,
+				B73B279B2DC49B57007FDF9A /* Glint_mobile_POCUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B73B27832DC49B57007FDF9A /* Glint_mobile_POC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B73B27A52DC49B57007FDF9A /* Build configuration list for PBXNativeTarget "Glint_mobile_POC" */;
+			buildPhases = (
+				B73B27802DC49B57007FDF9A /* Sources */,
+				B73B27812DC49B57007FDF9A /* Frameworks */,
+				B73B27822DC49B57007FDF9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B73B27862DC49B57007FDF9A /* Glint_mobile_POC */,
+			);
+			name = Glint_mobile_POC;
+			packageProductDependencies = (
+			);
+			productName = Glint_mobile_POC;
+			productReference = B73B27842DC49B57007FDF9A /* Glint_mobile_POC.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B73B27902DC49B57007FDF9A /* Glint_mobile_POCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B73B27A82DC49B57007FDF9A /* Build configuration list for PBXNativeTarget "Glint_mobile_POCTests" */;
+			buildPhases = (
+				B73B278D2DC49B57007FDF9A /* Sources */,
+				B73B278E2DC49B57007FDF9A /* Frameworks */,
+				B73B278F2DC49B57007FDF9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B73B27932DC49B57007FDF9A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B73B27942DC49B57007FDF9A /* Glint_mobile_POCTests */,
+			);
+			name = Glint_mobile_POCTests;
+			packageProductDependencies = (
+			);
+			productName = Glint_mobile_POCTests;
+			productReference = B73B27912DC49B57007FDF9A /* Glint_mobile_POCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B73B279A2DC49B57007FDF9A /* Glint_mobile_POCUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B73B27AB2DC49B57007FDF9A /* Build configuration list for PBXNativeTarget "Glint_mobile_POCUITests" */;
+			buildPhases = (
+				B73B27972DC49B57007FDF9A /* Sources */,
+				B73B27982DC49B57007FDF9A /* Frameworks */,
+				B73B27992DC49B57007FDF9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B73B279D2DC49B57007FDF9A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B73B279E2DC49B57007FDF9A /* Glint_mobile_POCUITests */,
+			);
+			name = Glint_mobile_POCUITests;
+			packageProductDependencies = (
+			);
+			productName = Glint_mobile_POCUITests;
+			productReference = B73B279B2DC49B57007FDF9A /* Glint_mobile_POCUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B73B277C2DC49B57007FDF9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					B73B27832DC49B57007FDF9A = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					B73B27902DC49B57007FDF9A = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = B73B27832DC49B57007FDF9A;
+					};
+					B73B279A2DC49B57007FDF9A = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = B73B27832DC49B57007FDF9A;
+					};
+				};
+			};
+			buildConfigurationList = B73B277F2DC49B57007FDF9A /* Build configuration list for PBXProject "Glint_mobile_POC" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B73B277B2DC49B57007FDF9A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B73B27852DC49B57007FDF9A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B73B27832DC49B57007FDF9A /* Glint_mobile_POC */,
+				B73B27902DC49B57007FDF9A /* Glint_mobile_POCTests */,
+				B73B279A2DC49B57007FDF9A /* Glint_mobile_POCUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B73B27822DC49B57007FDF9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73B278F2DC49B57007FDF9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73B27992DC49B57007FDF9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B73B27802DC49B57007FDF9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73B278D2DC49B57007FDF9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B73B27972DC49B57007FDF9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B73B27932DC49B57007FDF9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B73B27832DC49B57007FDF9A /* Glint_mobile_POC */;
+			targetProxy = B73B27922DC49B57007FDF9A /* PBXContainerItemProxy */;
+		};
+		B73B279D2DC49B57007FDF9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B73B27832DC49B57007FDF9A /* Glint_mobile_POC */;
+			targetProxy = B73B279C2DC49B57007FDF9A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B73B27A32DC49B57007FDF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B73B27A42DC49B57007FDF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B73B27A62DC49B57007FDF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Glint.Glint-mobile-POC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B73B27A72DC49B57007FDF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Glint.Glint-mobile-POC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B73B27A92DC49B57007FDF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Glint.Glint-mobile-POCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glint_mobile_POC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Glint_mobile_POC";
+			};
+			name = Debug;
+		};
+		B73B27AA2DC49B57007FDF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Glint.Glint-mobile-POCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glint_mobile_POC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Glint_mobile_POC";
+			};
+			name = Release;
+		};
+		B73B27AC2DC49B57007FDF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Glint.Glint-mobile-POCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Glint_mobile_POC;
+			};
+			name = Debug;
+		};
+		B73B27AD2DC49B57007FDF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2TZJP6DQL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Glint.Glint-mobile-POCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Glint_mobile_POC;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B73B277F2DC49B57007FDF9A /* Build configuration list for PBXProject "Glint_mobile_POC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B73B27A32DC49B57007FDF9A /* Debug */,
+				B73B27A42DC49B57007FDF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B73B27A52DC49B57007FDF9A /* Build configuration list for PBXNativeTarget "Glint_mobile_POC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B73B27A62DC49B57007FDF9A /* Debug */,
+				B73B27A72DC49B57007FDF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B73B27A82DC49B57007FDF9A /* Build configuration list for PBXNativeTarget "Glint_mobile_POCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B73B27A92DC49B57007FDF9A /* Debug */,
+				B73B27AA2DC49B57007FDF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B73B27AB2DC49B57007FDF9A /* Build configuration list for PBXNativeTarget "Glint_mobile_POCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B73B27AC2DC49B57007FDF9A /* Debug */,
+				B73B27AD2DC49B57007FDF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B73B277C2DC49B57007FDF9A /* Project object */;
+}
