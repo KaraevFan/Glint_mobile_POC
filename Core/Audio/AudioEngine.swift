@@ -48,7 +48,12 @@ class AudioEngine: ObservableObject {
     @MainActor // Ensure UI-related property updates happen on the main thread
     func requestPermission() async {
         print("Requesting microphone permission...")
-        let granted = await AVAudioSession.sharedInstance().requestRecordPermission()
+        let granted = await withCheckedContinuation { continuation in
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                continuation.resume(returning: granted)
+            }
+        }
+
         if granted {
             print("Microphone permission GRANTED by user.")
             self.permissionStatus = .granted
@@ -151,10 +156,16 @@ class AudioEngine: ObservableObject {
         do {
             try audioEngine.start()
             print("AudioEngine successfully started.")
-            errorMessage = nil // Clear previous errors
+            // Ensure UI updates are on the main thread
+            DispatchQueue.main.async {
+                self.errorMessage = nil // Clear previous errors
+            }
         } catch let error as NSError {
             print("ERROR: Failed to start AVAudioEngine: \(error.localizedDescription)")
-            errorMessage = "Failed to start audio engine: \(error.localizedDescription)"
+            // Ensure UI updates are on the main thread
+            DispatchQueue.main.async {
+                self.errorMessage = "Failed to start audio engine: \(error.localizedDescription)"
+            }
             throw AudioEngineError.startFailure(error.localizedDescription)
         }
     }
@@ -187,7 +198,10 @@ class AudioEngine: ObservableObject {
             // Log error but don't throw, as stopping should proceed.
             print("WARNING: Failed to deactivate AVAudioSession: \(error.localizedDescription)")
             // We might not want to show this specific error to the user unless it persists.
-            // errorMessage = "Failed to release audio session: \(error.localizedDescription)"
+            // Ensure UI updates are on the main thread if uncommented
+            // DispatchQueue.main.async {
+            //     self.errorMessage = "Failed to release audio session: \(error.localizedDescription)"
+            // }
         }
     }
 
@@ -234,36 +248,43 @@ class AudioEngine: ObservableObject {
         switch type {
         case .began:
             print("Audio session interruption began. Stopping engine.")
-            // Stop the engine when interruption begins
-            stop()
-            // Update UI state if necessary (e.g., show paused state)
-            // Potentially set an errorMessage
+            // Ensure stop() call and any related UI updates happen on main thread
+            DispatchQueue.main.async {
+                // Stop the engine when interruption begins
+                self.stop()
+                // Update UI state if necessary (e.g., show paused state)
+                // self.errorMessage = "Recording paused due to interruption." // Example
+            }
 
         case .ended:
             print("Audio session interruption ended.")
-            // Check if the interruption options indicate we should resume
-            if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
-                let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-                if options.contains(.shouldResume) {
-                    print("Interruption ended with .shouldResume option. Restarting engine.")
-                    // Asynchronously attempt to restart the engine
-                    Task {
-                        do {
-                            // Ensure session is configured before starting
-                            // Depending on state management, might need to re-run configureSession/setupEngine
-                            // For simplicity, assuming they are still valid.
-                            try await start()
-                        } catch {
-                            print("ERROR: Failed to restart engine after interruption: \(error.localizedDescription)")
-                            // Update UI or state to reflect failure to resume
-                            self.errorMessage = "Failed to resume recording after interruption."
+            // Ensure UI updates and potential engine restart happen on main thread
+            DispatchQueue.main.async {
+                // Check if the interruption options indicate we should resume
+                if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
+                    let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+                    if options.contains(.shouldResume) {
+                        print("Interruption ended with .shouldResume option. Restarting engine.")
+                        // Asynchronously attempt to restart the engine
+                        Task {
+                            do {
+                                // Ensure session is configured before starting
+                                // Depending on state management, might need to re-run configureSession/setupEngine
+                                // For simplicity, assuming they are still valid.
+                                try await self.start() // Call start on self
+                            } catch {
+                                print("ERROR: Failed to restart engine after interruption: \(error.localizedDescription)")
+                                // Update UI or state to reflect failure to resume
+                                // Ensure this errorMessage update is also on the main thread (already inside DispatchQueue.main.async)
+                                self.errorMessage = "Failed to resume recording after interruption."
+                            }
                         }
+                    } else {
+                        print("Interruption ended without .shouldResume option.")
                     }
                 } else {
-                    print("Interruption ended without .shouldResume option.")
+                     print("Interruption ended without options info.")
                 }
-            } else {
-                 print("Interruption ended without options info.")
             }
         @unknown default:
             print("Unknown interruption type received.")

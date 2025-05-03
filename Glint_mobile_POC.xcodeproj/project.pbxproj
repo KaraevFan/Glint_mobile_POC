@@ -29,9 +29,36 @@
 		B73B279B2DC49B57007FDF9A /* Glint_mobile_POCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Glint_mobile_POCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B7F5C06A2DC4ADFA00ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Glint_mobile_POC" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Glint-mobile-POC-Info.plist",
+				"Resources/coreml-decoder-base.en.mlpackage",
+				"Resources/coreml-encoder-base.en.mlpackage",
+			);
+			target = B73B27832DC49B57007FDF9A /* Glint_mobile_POC */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		B7F5C06D2DC4AE0100ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Copy Bundle Resources" phase from "Glint_mobile_POC" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = B73B27822DC49B57007FDF9A /* Resources */;
+			membershipExceptions = (
+				"Resources/coreml-decoder-base.en.mlpackage",
+				"Resources/coreml-encoder-base.en.mlpackage",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B73B27862DC49B57007FDF9A /* Glint_mobile_POC */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B7F5C06A2DC4ADFA00ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Glint_mobile_POC" target */,
+				B7F5C06D2DC4AE0100ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Copy Bundle Resources" phase from "Glint_mobile_POC" target */,
+			);
 			path = Glint_mobile_POC;
 			sourceTree = "<group>";
 		};
@@ -400,6 +427,8 @@
 				DEVELOPMENT_TEAM = G2TZJP6DQL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Glint-mobile-POC-Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs access to the microphone to record audio notes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +457,8 @@
 				DEVELOPMENT_TEAM = G2TZJP6DQL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Glint-mobile-POC-Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs access to the microphone to record audio notes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

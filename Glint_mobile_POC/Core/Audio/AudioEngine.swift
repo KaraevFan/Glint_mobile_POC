@@ -48,7 +48,12 @@ class AudioEngine: ObservableObject {
     @MainActor // Ensure UI-related property updates happen on the main thread
     func requestPermission() async {
         print("Requesting microphone permission...")
-        let granted = await AVAudioSession.sharedInstance().requestRecordPermission()
+        let granted = await withCheckedContinuation { continuation in
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                continuation.resume(returning: granted)
+            }
+        }
+
         if granted {
             print("Microphone permission GRANTED by user.")
             self.permissionStatus = .granted
@@ -60,7 +65,6 @@ class AudioEngine: ObservableObject {
             self.errorMessage = "Microphone access was denied. Please enable it in Settings."
         }
     }
-
     /// Configures the AVAudioSession for recording.
     /// Must be called *after* permission is granted.
     func configureSession() throws {
