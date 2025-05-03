@@ -31,11 +31,15 @@ class AudioEngine: ObservableObject {
     private let audioEngine = AVAudioEngine()
     private let audioSession = AVAudioSession.sharedInstance()
     private var inputNode: AVAudioInputNode { audioEngine.inputNode } // Convenience accessor
+    private var isTapInstalled = false // Track tap state
 
     // MARK: - Initialization
     init() {
         // Check initial permission status without prompting
-        updatePermissionStatus()
+        // Call the main-actor isolated function from a Task
+        Task {
+            await updatePermissionStatus()
+        }
         // Configure session interruption handling
         setupInterruptionObserver()
         // Configure route change handling (optional)
@@ -56,18 +60,23 @@ class AudioEngine: ObservableObject {
 
         if granted {
             print("Microphone permission GRANTED by user.")
-            self.permissionStatus = .granted
-            self.errorMessage = nil // Clear any previous error
+            DispatchQueue.main.async {
+                self.permissionStatus = .granted
+                self.errorMessage = nil // Clear any previous error
+            }
         } else {
             print("Microphone permission DENIED by user.")
-            self.permissionStatus = .denied
-            // Optionally set an error message
-            self.errorMessage = "Microphone access was denied. Please enable it in Settings."
+            DispatchQueue.main.async {
+                self.permissionStatus = .denied
+                // Optionally set an error message
+                self.errorMessage = "Microphone access was denied. Please enable it in Settings."
+            }
         }
     }
 
     /// Configures the AVAudioSession for recording.
     /// Must be called *after* permission is granted.
+    /// Does NOT activate the session.
     func configureSession() throws {
         print("Configuring AVAudioSession...")
         guard permissionStatus == .granted else {
@@ -77,62 +86,21 @@ class AudioEngine: ObservableObject {
 
         do {
             // Set the session category, mode, and options.
-            // .playAndRecord allows recording and potential future playback.
-            // .measurement mode is suitable for signal processing.
-            // Options: duckOthers lowers other app volumes, allowBluetoothA2DP enables BT output.
             try audioSession.setCategory(.playAndRecord, mode: .measurement, options: [.duckOthers, .allowBluetoothA2DP])
-
-            // Activate the audio session
-            try audioSession.setActive(true)
-            print("AVAudioSession configured and activated.")
-            errorMessage = nil // Clear previous errors
+            print("AVAudioSession category and mode configured.")
+            // Activation happens in start()
+            DispatchQueue.main.async { self.errorMessage = nil }
 
         } catch let error as NSError {
             print("Failed to configure AVAudioSession: \(error.localizedDescription)")
-            errorMessage = "Failed to configure audio session: \(error.localizedDescription)"
-            // Map the underlying NSError to our custom error type
-            throw AudioEngineError.configurationError(error.localizedDescription)
+            let message = "Failed to configure audio session: \(error.localizedDescription)"
+            DispatchQueue.main.async { self.errorMessage = message }
+            throw AudioEngineError.configurationError(message)
         }
     }
 
-    /// Sets up the AVAudioEngine, installs a tap on the input node.
-    /// Must be called *after* session is configured.
-    func setupEngine() throws {
-        print("Setting up AVAudioEngine...")
-
-        let inputFormat = inputNode.outputFormat(forBus: 0)
-        let outputFormat = inputNode.inputFormat(forBus: 0)
-
-        // Check if sample rates match - required by some models like Whisper
-        // Whisper expects 16kHz. We might need resampling if the hardware default is different.
-        guard inputFormat.sampleRate == outputFormat.sampleRate else {
-             // This scenario requires adding an AVAudioMixerNode for format conversion.
-             // For simplicity now, we'll throw an error if formats don't match.
-             // TODO: Implement resampling if necessary.
-             let message = "Input (\(inputFormat.sampleRate)Hz) and output (\(outputFormat.sampleRate)Hz) sample rates do not match. Resampling needed."
-             print("ERROR: \(message)")
-             errorMessage = message
-             throw AudioEngineError.engineSetupError(message)
-         }
-
-        print("Audio format: \(inputFormat)")
-
-        // Install the tap on the input node
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: inputFormat) { [weak self] (buffer, when) in
-            // Send the captured buffer to the Combine subject
-            self?.audioBufferSubject.send(buffer)
-        }
-
-        // Prepare the audio engine (allocates resources)
-        audioEngine.prepare()
-        print("AVAudioEngine setup complete and tap installed.")
-        errorMessage = nil // Clear previous errors
-
-        // Note: We catch errors during the actual start() phase
-    }
-
-    /// Starts the audio engine and begins capturing audio buffers.
-    /// Ensures permission is granted and session/engine are configured.
+    /// Starts the audio engine: activates session, prepares engine, installs tap, starts engine.
+    /// Ensures permission is granted and session is configured.
     func start() async throws {
         print("Attempting to start AudioEngine...")
 
@@ -145,32 +113,43 @@ class AudioEngine: ObservableObject {
         // 1. Check permission status
         guard permissionStatus == .granted else {
             print("ERROR: Attempted to start AudioEngine without permission.")
-            errorMessage = "Microphone permission not granted."
+            let message = "Microphone permission not granted."
+            DispatchQueue.main.async { self.errorMessage = message }
             throw AudioEngineError.permissionDenied
         }
 
-        // Note: Assuming configureSession() and setupEngine() were called successfully beforehand.
-        // In a production app, you might add state checks here.
+        // Note: Assuming configureSession() was called successfully beforehand.
 
-        // 4. Start engine
+        // 2. Activate Session, Prepare Engine, Install Tap
         do {
+            // Ensure the session is active before preparing/starting.
+            print("Activating audio session...")
+            try audioSession.setActive(true)
+            print("Audio session activated.")
+
+            // Prepare engine and install tap
+            try self.prepareAndInstallTap()
+
+            // 3. Start the engine
+            print("Starting engine...")
             try audioEngine.start()
             print("AudioEngine successfully started.")
-            // Ensure UI updates are on the main thread
             DispatchQueue.main.async {
                 self.errorMessage = nil // Clear previous errors
             }
         } catch let error as NSError {
             print("ERROR: Failed to start AVAudioEngine: \(error.localizedDescription)")
-            // Ensure UI updates are on the main thread
+            let message = "Failed to start audio engine: \(error.localizedDescription)"
+            // Attempt to clean up if start failed
+            self.stop() // Call stop to ensure resources are released
             DispatchQueue.main.async {
-                self.errorMessage = "Failed to start audio engine: \(error.localizedDescription)"
+                self.errorMessage = message
             }
-            throw AudioEngineError.startFailure(error.localizedDescription)
+            throw AudioEngineError.startFailure(message)
         }
     }
 
-    /// Stops the audio engine and releases resources.
+    /// Stops the audio engine, removes tap, and deactivates session.
     func stop() {
         print("Attempting to stop AudioEngine...")
 
@@ -184,46 +163,81 @@ class AudioEngine: ObservableObject {
         audioEngine.stop()
         print("AudioEngine stopped.")
 
-        // 2. Remove tap
-        // Ensure tap is removed *after* stopping the engine
-        inputNode.removeTap(onBus: 0)
-        print("Audio tap removed.")
+        // 2. Remove tap if installed
+        if isTapInstalled {
+            inputNode.removeTap(onBus: 0)
+            isTapInstalled = false
+            print("Audio tap removed.")
+        }
 
-        // 3. Optionally deactivate audio session
-        // It's good practice to deactivate the session when not recording.
+        // 3. Deactivate audio session
         do {
             try audioSession.setActive(false)
             print("AVAudioSession deactivated.")
         } catch let error as NSError {
-            // Log error but don't throw, as stopping should proceed.
+            // Log error but don't necessarily show to user
             print("WARNING: Failed to deactivate AVAudioSession: \(error.localizedDescription)")
-            // We might not want to show this specific error to the user unless it persists.
-            // Ensure UI updates are on the main thread if uncommented
-            // DispatchQueue.main.async {
-            //     self.errorMessage = "Failed to release audio session: \(error.localizedDescription)"
-            // }
         }
+        // Clear error on successful stop
+        DispatchQueue.main.async { self.errorMessage = nil }
     }
 
     // MARK: - Private Helpers
 
+    /// Prepares the audio engine and installs the audio tap.
+    private func prepareAndInstallTap() throws {
+        print("Preparing engine and installing tap...")
+
+        let inputFormat = inputNode.outputFormat(forBus: 0)
+        let outputFormat = inputNode.inputFormat(forBus: 0)
+
+        // Check sample rates
+        guard inputFormat.sampleRate == outputFormat.sampleRate else {
+            let message = "Input (\(inputFormat.sampleRate)Hz) and output (\(outputFormat.sampleRate)Hz) sample rates do not match. Resampling needed."
+            print("ERROR: \(message)")
+            DispatchQueue.main.async { self.errorMessage = message }
+            throw AudioEngineError.engineSetupError(message)
+        }
+        print("Audio format: \(inputFormat)")
+
+        // Install the tap
+        // Avoid installing tap if already present (though removeTap in stop should prevent this)
+        if !isTapInstalled {
+            inputNode.installTap(onBus: 0, bufferSize: 1024, format: inputFormat) { [weak self] (buffer, when) in
+                // Send the captured buffer to the Combine subject
+                // Note: Subscriber must handle main thread dispatch if updating UI directly
+                self?.audioBufferSubject.send(buffer)
+            }
+            isTapInstalled = true
+            print("Audio tap installed.")
+        }
+
+        // Prepare the audio engine
+        audioEngine.prepare()
+        print("AVAudioEngine prepared.")
+    }
+
     /// Updates the internal permission status based on the current session state.
+    @MainActor
     private func updatePermissionStatus() {
-       print("Updating permission status...")
-       switch AVAudioSession.sharedInstance().recordPermission {
-       case .granted:
-           permissionStatus = .granted
-           print("Initial permission status: granted")
-       case .denied:
-           permissionStatus = .denied
-           print("Initial permission status: denied")
-       case .undetermined:
-           permissionStatus = .undetermined
-           print("Initial permission status: undetermined")
-       @unknown default:
-           permissionStatus = .undetermined
-           print("Initial permission status: unknown (treating as undetermined)")
-       }
+        print("Updating permission status...")
+        let currentStatus: MicrophonePermissionStatus
+        switch AVAudioSession.sharedInstance().recordPermission {
+        case .granted:
+            currentStatus = .granted
+            print("Initial permission status: granted")
+        case .denied:
+            currentStatus = .denied
+            print("Initial permission status: denied")
+        case .undetermined:
+            currentStatus = .undetermined
+            print("Initial permission status: undetermined")
+        @unknown default:
+            currentStatus = .undetermined
+            print("Initial permission status: unknown (treating as undetermined)")
+        }
+        // Update @Published property on main thread
+        self.permissionStatus = currentStatus
     }
 
     /// Sets up an observer for AVAudioSession interruptions (e.g., phone calls).
@@ -248,34 +262,26 @@ class AudioEngine: ObservableObject {
         switch type {
         case .began:
             print("Audio session interruption began. Stopping engine.")
-            // Ensure stop() call and any related UI updates happen on main thread
+            // Ensure stop() call happens on main thread as it updates UI state
             DispatchQueue.main.async {
-                // Stop the engine when interruption begins
                 self.stop()
-                // Update UI state if necessary (e.g., show paused state)
-                // self.errorMessage = "Recording paused due to interruption." // Example
+                self.errorMessage = "Recording paused due to interruption."
             }
 
         case .ended:
             print("Audio session interruption ended.")
             // Ensure UI updates and potential engine restart happen on main thread
             DispatchQueue.main.async {
-                // Check if the interruption options indicate we should resume
+                self.errorMessage = nil // Clear interruption message
                 if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
                     let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
                     if options.contains(.shouldResume) {
-                        print("Interruption ended with .shouldResume option. Restarting engine.")
-                        // Asynchronously attempt to restart the engine
+                        print("Interruption ended with .shouldResume option. Attempting restart...")
                         Task {
                             do {
-                                // Ensure session is configured before starting
-                                // Depending on state management, might need to re-run configureSession/setupEngine
-                                // For simplicity, assuming they are still valid.
-                                try await self.start() // Call start on self
+                                try await self.start()
                             } catch {
                                 print("ERROR: Failed to restart engine after interruption: \(error.localizedDescription)")
-                                // Update UI or state to reflect failure to resume
-                                // Ensure this errorMessage update is also on the main thread (already inside DispatchQueue.main.async)
                                 self.errorMessage = "Failed to resume recording after interruption."
                             }
                         }
@@ -283,7 +289,7 @@ class AudioEngine: ObservableObject {
                         print("Interruption ended without .shouldResume option.")
                     }
                 } else {
-                     print("Interruption ended without options info.")
+                    print("Interruption ended without options info.")
                 }
             }
         @unknown default:
@@ -295,11 +301,20 @@ class AudioEngine: ObservableObject {
     // private func setupRouteChangeObserver() { ... }
 }
 
-// Example Error Enum (define properly)
-enum AudioEngineError: Error {
+// Custom Error Enum
+enum AudioEngineError: Error, LocalizedError {
     case permissionDenied
     case configurationError(String)
     case engineSetupError(String)
     case startFailure(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .permissionDenied: return "Microphone permission was denied."
+        case .configurationError(let msg): return "Audio session configuration failed: \(msg)"
+        case .engineSetupError(let msg): return "Audio engine setup failed: \(msg)"
+        case .startFailure(let msg): return "Failed to start audio engine: \(msg)"
+        }
+    }
 }
 

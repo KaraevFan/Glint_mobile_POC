@@ -16,7 +16,8 @@ struct ContentView: View {
     @State private var receivingBuffers = false
     @State private var bufferCount = 0
     @State private var cancellable: AnyCancellable?
-    @State private var setupComplete = false // Track if configure/setup was successful
+    // Track if configureSession was successful
+    @State private var isSessionConfigured = false 
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -31,13 +32,15 @@ struct ContentView: View {
                 Text("Status:").font(.headline)
                 Text(" • Permission: \(audioEngine.permissionStatus)")
                 Text(" • Engine Running: \(audioEngine.isRunning ? "Yes" : "No")")
-                Text(" • Setup Complete: \(setupComplete ? "Yes" : "No")")
+                // Updated state variable name
+                Text(" • Session Configured: \(isSessionConfigured ? "Yes" : "No")") 
                 Text(" • Receiving Buffers: \(receivingBuffers ? "Yes (Count: \(bufferCount))" : "No")")
             }
 
             // Error Display
             if let error = audioEngine.errorMessage {
-                Text("Error: \(error)")
+                // Use the localized description from the error enum
+                Text("Error: \(error)") 
                     .foregroundColor(.red)
                     .padding(.vertical, 5)
             }
@@ -56,38 +59,43 @@ struct ContentView: View {
                  .buttonStyle(.bordered)
                  .disabled(audioEngine.permissionStatus != .undetermined)
 
+                 // Renamed button slightly for clarity
                  Button {
                     Task {
                         do {
                             if audioEngine.permissionStatus == .granted {
-                                try audioEngine.configureSession()
-                                try audioEngine.setupEngine()
-                                setupComplete = true // Mark setup as done
-                                print("Configure & Setup Successful")
+                                // Only configure the session here
+                                try audioEngine.configureSession() 
+                                // Removed setupEngine call
+                                isSessionConfigured = true // Mark configuration as done
+                                print("Configure Session Successful")
                             } else {
-                                print("Configure/Setup Error: Permission not granted")
-                                // Error message is handled internally
+                                print("Configure Session Error: Permission not granted")
+                                // Error message is handled internally by configureSession
                             }
                         } catch {
-                            print("Configure/Setup Error: \(error)")
-                            setupComplete = false // Reset on error
+                            print("Configure Session Error: \(error)")
+                            isSessionConfigured = false // Reset on error
                             // Error message should be set within AudioEngine methods
                         }
                     }
                  } label: {
-                    Label("Configure Session & Setup Engine", systemImage: "gearshape.2.fill")
+                    // Renamed label slightly
+                    Label("Configure Session", systemImage: "gearshape.fill") 
                  }
                  .buttonStyle(.bordered)
-                 .disabled(audioEngine.permissionStatus != .granted || setupComplete) // Disable if not granted or already set up
+                  // Updated disabled logic
+                 .disabled(audioEngine.permissionStatus != .granted || isSessionConfigured)
 
                 HStack {
                     Button {
                         Task {
                             do {
-                               try await audioEngine.start()
+                               // Correctly call the async throws start method
+                               try await audioEngine.start() 
                             } catch {
-                               print("Start Error: \(error)")
-                                // Error message should be set within AudioEngine methods
+                               print("Start Error: \(error.localizedDescription)")
+                                // Error message should be set within AudioEngine's start method
                             }
                         }
                     } label: {
@@ -95,7 +103,8 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.green)
-                    .disabled(audioEngine.permissionStatus != .granted || !setupComplete || audioEngine.isRunning)
+                     // Updated disabled logic
+                    .disabled(audioEngine.permissionStatus != .granted || !isSessionConfigured || audioEngine.isRunning)
 
                     Button {
                         audioEngine.stop()
