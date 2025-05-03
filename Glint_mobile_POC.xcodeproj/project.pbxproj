@@ -6,6 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B742CA8D2DC5BD88009ECFB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B742CA8A2DC5BD88009ECFB7 /* Assets.xcassets */; };
+		B742CA8E2DC5BD88009ECFB7 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA7D2DC5BD88009ECFB7 /* AudioEngine.swift */; };
+		B742CA8F2DC5BD88009ECFB7 /* coreml-decoder-base.en.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = B742CA802DC5BD88009ECFB7 /* coreml-decoder-base.en.mlpackage */; };
+		B742CA902DC5BD88009ECFB7 /* Glint_mobile_POCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA8B2DC5BD88009ECFB7 /* Glint_mobile_POCApp.swift */; };
+		B742CA912DC5BD88009ECFB7 /* coreml-encoder-base.en.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = B742CA822DC5BD88009ECFB7 /* coreml-encoder-base.en.mlpackage */; };
+		B742CA922DC5BD88009ECFB7 /* coreml-decoder-base.en.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA812DC5BD88009ECFB7 /* coreml-decoder-base.en.swift */; };
+		B742CA932DC5BD88009ECFB7 /* coreml-encoder-base.en.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA832DC5BD88009ECFB7 /* coreml-encoder-base.en.swift */; };
+		B742CA942DC5BD88009ECFB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA882DC5BD88009ECFB7 /* ContentView.swift */; };
+		B742CA952DC5BD88009ECFB7 /* ModelLoaderUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA862DC5BD88009ECFB7 /* ModelLoaderUtil.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		B73B27922DC49B57007FDF9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,41 +39,18 @@
 		B73B27842DC49B57007FDF9A /* Glint_mobile_POC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glint_mobile_POC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73B27912DC49B57007FDF9A /* Glint_mobile_POCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Glint_mobile_POCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73B279B2DC49B57007FDF9A /* Glint_mobile_POCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Glint_mobile_POCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B742CA7D2DC5BD88009ECFB7 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		B742CA802DC5BD88009ECFB7 /* coreml-decoder-base.en.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = "coreml-decoder-base.en.mlpackage"; sourceTree = "<group>"; };
+		B742CA812DC5BD88009ECFB7 /* coreml-decoder-base.en.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "coreml-decoder-base.en.swift"; sourceTree = "<group>"; };
+		B742CA822DC5BD88009ECFB7 /* coreml-encoder-base.en.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = "coreml-encoder-base.en.mlpackage"; sourceTree = "<group>"; };
+		B742CA832DC5BD88009ECFB7 /* coreml-encoder-base.en.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "coreml-encoder-base.en.swift"; sourceTree = "<group>"; };
+		B742CA862DC5BD88009ECFB7 /* ModelLoaderUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoaderUtil.swift; sourceTree = "<group>"; };
+		B742CA882DC5BD88009ECFB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B742CA8A2DC5BD88009ECFB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B742CA8B2DC5BD88009ECFB7 /* Glint_mobile_POCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glint_mobile_POCApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B7F5C06A2DC4ADFA00ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Glint_mobile_POC" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Glint-mobile-POC-Info.plist",
-				"Resources/coreml-decoder-base.en.mlpackage",
-				"Resources/coreml-encoder-base.en.mlpackage",
-			);
-			target = B73B27832DC49B57007FDF9A /* Glint_mobile_POC */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		B7F5C06D2DC4AE0100ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Copy Bundle Resources" phase from "Glint_mobile_POC" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = B73B27822DC49B57007FDF9A /* Resources */;
-			membershipExceptions = (
-				"Resources/coreml-decoder-base.en.mlpackage",
-				"Resources/coreml-encoder-base.en.mlpackage",
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B73B27862DC49B57007FDF9A /* Glint_mobile_POC */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				B7F5C06A2DC4ADFA00ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Glint_mobile_POC" target */,
-				B7F5C06D2DC4AE0100ED7FD4 /* Exceptions for "Glint_mobile_POC" folder in "Copy Bundle Resources" phase from "Glint_mobile_POC" target */,
-			);
-			path = Glint_mobile_POC;
-			sourceTree = "<group>";
-		};
 		B73B27942DC49B57007FDF9A /* Glint_mobile_POCTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Glint_mobile_POCTests;
@@ -102,7 +91,7 @@
 		B73B277B2DC49B57007FDF9A = {
 			isa = PBXGroup;
 			children = (
-				B73B27862DC49B57007FDF9A /* Glint_mobile_POC */,
+				B742CA8C2DC5BD88009ECFB7 /* Glint_mobile_POC */,
 				B73B27942DC49B57007FDF9A /* Glint_mobile_POCTests */,
 				B73B279E2DC49B57007FDF9A /* Glint_mobile_POCUITests */,
 				B73B27852DC49B57007FDF9A /* Products */,
@@ -119,6 +108,70 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B742CA7E2DC5BD88009ECFB7 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				B742CA7D2DC5BD88009ECFB7 /* AudioEngine.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		B742CA7F2DC5BD88009ECFB7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B742CA7E2DC5BD88009ECFB7 /* Audio */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B742CA842DC5BD88009ECFB7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B742CA802DC5BD88009ECFB7 /* coreml-decoder-base.en.mlpackage */,
+				B742CA812DC5BD88009ECFB7 /* coreml-decoder-base.en.swift */,
+				B742CA822DC5BD88009ECFB7 /* coreml-encoder-base.en.mlpackage */,
+				B742CA832DC5BD88009ECFB7 /* coreml-encoder-base.en.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B742CA852DC5BD88009ECFB7 /* Transcription */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Transcription;
+			sourceTree = "<group>";
+		};
+		B742CA872DC5BD88009ECFB7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B742CA862DC5BD88009ECFB7 /* ModelLoaderUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B742CA892DC5BD88009ECFB7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B742CA882DC5BD88009ECFB7 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B742CA8C2DC5BD88009ECFB7 /* Glint_mobile_POC */ = {
+			isa = PBXGroup;
+			children = (
+				B742CA7F2DC5BD88009ECFB7 /* Core */,
+				B742CA842DC5BD88009ECFB7 /* Resources */,
+				B742CA852DC5BD88009ECFB7 /* Transcription */,
+				B742CA872DC5BD88009ECFB7 /* Utils */,
+				B742CA892DC5BD88009ECFB7 /* Views */,
+				B742CA8A2DC5BD88009ECFB7 /* Assets.xcassets */,
+				B742CA8B2DC5BD88009ECFB7 /* Glint_mobile_POCApp.swift */,
+			);
+			path = Glint_mobile_POC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -133,9 +186,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				B73B27862DC49B57007FDF9A /* Glint_mobile_POC */,
 			);
 			name = Glint_mobile_POC;
 			packageProductDependencies = (
@@ -239,6 +289,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B742CA8D2DC5BD88009ECFB7 /* Assets.xcassets in Resources */,
+				B742CA912DC5BD88009ECFB7 /* coreml-encoder-base.en.mlpackage in Resources */,
+				B742CA8F2DC5BD88009ECFB7 /* coreml-decoder-base.en.mlpackage in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +316,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B742CA8E2DC5BD88009ECFB7 /* AudioEngine.swift in Sources */,
+				B742CA902DC5BD88009ECFB7 /* Glint_mobile_POCApp.swift in Sources */,
+				B742CA922DC5BD88009ECFB7 /* coreml-decoder-base.en.swift in Sources */,
+				B742CA932DC5BD88009ECFB7 /* coreml-encoder-base.en.swift in Sources */,
+				B742CA942DC5BD88009ECFB7 /* ContentView.swift in Sources */,
+				B742CA952DC5BD88009ECFB7 /* ModelLoaderUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
