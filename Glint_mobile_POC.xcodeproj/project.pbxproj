@@ -16,6 +16,7 @@
 		B742CA932DC5BD88009ECFB7 /* coreml-encoder-base.en.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA832DC5BD88009ECFB7 /* coreml-encoder-base.en.swift */; };
 		B742CA942DC5BD88009ECFB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA882DC5BD88009ECFB7 /* ContentView.swift */; };
 		B742CA952DC5BD88009ECFB7 /* ModelLoaderUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CA862DC5BD88009ECFB7 /* ModelLoaderUtil.swift */; };
+		B742CAA32DC7166E009ECFB7 /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742CAA22DC7166E009ECFB7 /* TranscriptionService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		B742CA882DC5BD88009ECFB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B742CA8A2DC5BD88009ECFB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B742CA8B2DC5BD88009ECFB7 /* Glint_mobile_POCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glint_mobile_POCApp.swift; sourceTree = "<group>"; };
+		B742CAA22DC7166E009ECFB7 /* TranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -138,6 +140,7 @@
 		B742CA852DC5BD88009ECFB7 /* Transcription */ = {
 			isa = PBXGroup;
 			children = (
+				B742CAA22DC7166E009ECFB7 /* TranscriptionService.swift */,
 			);
 			path = Transcription;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			files = (
 				B742CA8E2DC5BD88009ECFB7 /* AudioEngine.swift in Sources */,
 				B742CA902DC5BD88009ECFB7 /* Glint_mobile_POCApp.swift in Sources */,
+				B742CAA32DC7166E009ECFB7 /* TranscriptionService.swift in Sources */,
 				B742CA922DC5BD88009ECFB7 /* coreml-decoder-base.en.swift in Sources */,
 				B742CA932DC5BD88009ECFB7 /* coreml-encoder-base.en.swift in Sources */,
 				B742CA942DC5BD88009ECFB7 /* ContentView.swift in Sources */,

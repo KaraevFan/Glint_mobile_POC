@@ -11,13 +11,23 @@ import Combine // Needed for .onReceive
 struct ContentView: View {
     // Instantiate the AudioEngine using @StateObject
     @StateObject private var audioEngine = AudioEngine()
+    // Instantiate TranscriptionService, passing the audioEngine instance
+    @StateObject private var transcriptionService: TranscriptionService
 
-    // State to track buffer reception
+    // State to track buffer reception (from AudioEngine directly for now)
     @State private var receivingBuffers = false
     @State private var bufferCount = 0
     @State private var cancellable: AnyCancellable?
     // Track if configureSession was successful
-    @State private var isSessionConfigured = false 
+    @State private var isSessionConfigured = false
+
+    // Custom initializer to pass audioEngine to transcriptionService
+    init() {
+        let engine = AudioEngine()
+        _audioEngine = StateObject(wrappedValue: engine)
+        _transcriptionService = StateObject(wrappedValue: TranscriptionService(audioEngine: engine))
+        print("ContentView initialized with new AudioEngine and TranscriptionService.")
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -33,15 +43,24 @@ struct ContentView: View {
                 Text(" • Permission: \(audioEngine.permissionStatus)")
                 Text(" • Engine Running: \(audioEngine.isRunning ? "Yes" : "No")")
                 // Updated state variable name
-                Text(" • Session Configured: \(isSessionConfigured ? "Yes" : "No")") 
+                Text(" • Session Configured: \(isSessionConfigured ? "Yes" : "No")")
                 Text(" • Receiving Buffers: \(receivingBuffers ? "Yes (Count: \(bufferCount))" : "No")")
+                // Add TranscriptionService status
+                Text(" • Transcribing: \(transcriptionService.isTranscribing ? "Yes" : "No")")
+                // Display placeholder transcript
+                Text(" • Transcript: \(transcriptionService.currentTranscript)")
+                    .lineLimit(3) // Limit lines displayed
             }
 
             // Error Display
-            if let error = audioEngine.errorMessage {
-                // Use the localized description from the error enum
-                Text("Error: \(error)") 
+            if let audioError = audioEngine.errorMessage {
+                Text("Audio Error: \(audioError)")
                     .foregroundColor(.red)
+                    .padding(.vertical, 5)
+            }
+            if let transcriptionError = transcriptionService.errorMessage {
+                Text("Transcription Error: \(transcriptionError)")
+                    .foregroundColor(.orange) // Use a different color? 
                     .padding(.vertical, 5)
             }
 
@@ -119,6 +138,43 @@ struct ContentView: View {
                     .disabled(!audioEngine.isRunning)
                 }
                 .frame(maxWidth: .infinity)
+                
+                // Add Transcription Controls (Placeholder)
+                HStack {
+                     Button {
+                         // Start both engine and transcription logic
+                         Task {
+                            do {
+                                try await audioEngine.start()
+                                // Only start transcription if engine started successfully
+                                if audioEngine.isRunning {
+                                     transcriptionService.startTranscription()
+                                }
+                            } catch {
+                                print("Start Error: \(error.localizedDescription)")
+                            }
+                         }
+                     } label: {
+                         Label("Start Recording", systemImage: "record.circle.fill")
+                     }
+                     .buttonStyle(.borderedProminent)
+                     .tint(.blue) 
+                     .disabled(audioEngine.permissionStatus != .granted || !isSessionConfigured || audioEngine.isRunning)
+                     
+                      Button {
+                         // Stop both
+                         audioEngine.stop()
+                         transcriptionService.stopTranscription()
+                         receivingBuffers = false
+                         bufferCount = 0
+                     } label: {
+                         Label("Stop Recording", systemImage: "stop.circle.fill")
+                     }
+                     .buttonStyle(.borderedProminent)
+                     .tint(.purple)
+                     .disabled(!audioEngine.isRunning)
+                }
+                .frame(maxWidth: .infinity)
             }
 
             Spacer() // Push content to top
@@ -173,6 +229,8 @@ extension MicrophonePermissionStatus: CustomStringConvertible {
 // Preview Provider
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        // Need to adjust preview provider if init changes significantly,
+        // but for now, the default init might still work visually.
         ContentView()
     }
 }
